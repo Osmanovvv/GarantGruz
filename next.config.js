@@ -1,14 +1,15 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  output: 'export',
-  trailingSlash: true,
-  images: {
-    unoptimized: true,
-  },
-  assetPrefix: process.env.NODE_ENV === 'production' ? 'https://garantgruz.ru' : '',
-  // SEO optimizations
-  poweredByHeader: false,
-  reactStrictMode: true,
-}
+const isProd = process.env.NODE_ENV === 'production';
+const isVercel = !!process.env.VERCEL;
 
-module.exports = nextConfig
+const nextConfig = {
+	output: 'export',
+	trailingSlash: true,
+	images: {
+		unoptimized: true,
+	},
+	assetPrefix: isProd && !isVercel ? 'https://garantgruz.ru' : '',
+	poweredByHeader: false,
+	reactStrictMode: true,
+};
+
+module.exports = nextConfig;
